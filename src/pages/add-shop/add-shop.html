@@ -14,6 +14,26 @@
 
 
 <ion-content padding>
+  <h2>Enter shop Detail:</h2>
+  <form (submit)="saveShop()">
+    <!--  <ion-item>
+      <ion-input [(ngModel)]="shop.shopName" name="shopName" type="text" placeholder="Shop Name"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.name_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.name_error}}</ion-label>
+    </ion-item>
+    //category
+    <ion-item>
+      <ion-input [(ngModel)]="" name="shopCategory" type="text"></ion-input>
+    </ion-item>-->
+    <!-- <ion-item>
+      <ion-label>Shop Category</ion-label>
+      <ion-select [(ngModel)]="shop.shopCategory" name="shopCategory">
+        <ion-option *ngFor="let category of categoryList" [value]="category"></ion-option>
+      </ion-select>
+    </ion-item> -->
+
+    <h4>Shop Address</h4>
     <ion-item>
       <p>{{imageURI}}</p>
       <button ion-button color="secondary" (click)="getImage()">Get Image</button>
@@ -22,7 +42,8 @@
       <h4>Image Preview</h4>
       <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
     </ion-item>
-    <ion-item>
-      <button ion-button (click)="saveImg()">Upload</button>
-    </ion-item>
-  </ion-content>
+    <button ion-button block type="submit">
+      Add Shop
+    </button>
+  </form>
+</ion-content>
