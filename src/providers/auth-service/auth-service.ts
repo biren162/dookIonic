@@ -16,7 +16,7 @@ export class AuthServiceProvider {
   private loginStatus;
   constructor(public http: Http) {
     console.log("Hello AuthServiceProvider Provider");
-    this.apiUrl = "http://10.13.92.255:8080/";
+    this.apiUrl = "http://10.13.10.51:8080/";
   }
   /*login2(credentials) {
     return new Promise((resolve, reject) => {
@@ -86,7 +86,7 @@ export class AuthServiceProvider {
         return Response;
       });
   }
-  private serializeObj(obj) {
+  /* private serializeObj(obj) {
     var result = [];
     for (var property in obj)
       result.push(
@@ -95,4 +95,5 @@ export class AuthServiceProvider {
 
     return result.join("&");
   }
+  */
 }

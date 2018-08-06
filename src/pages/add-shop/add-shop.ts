@@ -1,5 +1,6 @@
-import { Component, SystemJsNgModuleLoader } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component } from "@angular/core";
+//import { HttpClient } from "@angular/common/http";
+import { Geolocation } from "@ionic-native/geolocation";
 import {
   IonicPage,
   LoadingController,
@@ -23,7 +24,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
   templateUrl: "add-shop.html"
 })
 export class AddShopPage {
-  private image64;
+  //private image64;
   loading: any;
   url: String;
   shop = {
@@ -31,9 +32,10 @@ export class AddShopPage {
     shopCategory: "",
     ownerName: "",
     url: "",
-    lat: "",
-    longi: "",
-    address: { line1: "", area: "", city: "", state: "", country: "" }
+    lat: "-1",
+    longi: "-1",
+    address: { line1: "", area: "", city: "", state: "", country: "" },
+    sessionId: ""
   };
   errorMap = {
     name_error: "",
@@ -44,20 +46,37 @@ export class AddShopPage {
     country_error: ""
   };
   categoryList: any;
-  private imageFileName;
+  //private imageFileName;
   constructor(
     public navCtrl: NavController,
     private camera: Camera,
     public shopService: ShopServiceProvider,
     public navParams: NavParams,
-    public http: HttpClient,
+    //  public http: HttpClient,
     public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public geolocation: Geolocation
   ) {}
   ionViewDidLoad() {
-    console.log("did load:");
-    this.categoryList = this.shopService.getCategories();
-    console.log(this.categoryList);
+    //console.log("did load:");
+    this.shopService.getCategories().subscribe(
+      result => {
+        // console.log("getcat result:" + JSON.stringify(result));
+        this.categoryList = result;
+      },
+      err => {
+        console.log("error in fetching category list");
+      }
+    );
+    this.geolocation
+      .getCurrentPosition()
+      .then(resp => {
+        this.shop.lat = "" + resp.coords.latitude;
+        this.shop.longi = "" + resp.coords.longitude;
+      })
+      .catch(error => {
+        console.log("Error getting location", error);
+      });
   }
   getImage() {
     const options: CameraOptions = {
@@ -69,7 +88,7 @@ export class AddShopPage {
     this.camera.getPicture(options).then(
       imageData => {
         //  this.image64 = "data:image/jpeg;base64," + imageData;
-        this.image64 = imageData;
+        this.shop.url = imageData;
       },
       err => {
         console.log(err);
@@ -78,35 +97,39 @@ export class AddShopPage {
     );
   }
   saveShop() {
-    /*this.showLoader();
+    // this.showLoader();
+    //   this.loading.present().then(() => {
+    console.log(this.shop.address.line1);
+    this.shop.sessionId = localStorage.getItem("token");
     this.shopService.saveShop(this.shop).subscribe(
       result => {
-        console.log("inside result");
-        this.loading.dismiss();
+        console.log("inside result:");
+        // this.loading.dismiss();
         // this.url = result;
         //  this.imageFileName = this.url;
         if (result == "success") {
-          this.navCtrl.setRoot(addpagetoredirect);
+          this.navCtrl.popToRoot();
+        } else if (result == "error") {
+          this.presentToast("error in saving details");
         } else {
           this.errorMap = result;
         }
       },
       err => {
         console.log("inside err");
-        this.loading.dismiss();
+        //  this.loading.dismiss();
         this.presentToast(err);
       }
     );
-    console.log("img url:" + this.url);
-    */
+    // });
+
+    // console.log("img url:" + this.url);
   }
 
   showLoader() {
     this.loading = this.loadingCtrl.create({
       content: "Uploading..."
     });
-
-    this.loading.present();
   }
   presentToast(msg) {
     let toast = this.toastCtrl.create({

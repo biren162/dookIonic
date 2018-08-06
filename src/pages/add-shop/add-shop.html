@@ -12,37 +12,63 @@
 
 </ion-header>
 
-
 <ion-content padding>
-  <h2>Enter shop Detail:</h2>
-  <form (submit)="saveShop()">
-    <!--  <ion-item>
-      <ion-input [(ngModel)]="shop.shopName" name="shopName" type="text" placeholder="Shop Name"></ion-input>
+  <h4>Enter shop Detail:</h4>
+  <form>
+    <ion-item>
+      <ion-input [(ngModel)]="shop.shopName" name="shopName" type="text" placeholder="Shop Name *"></ion-input>
     </ion-item>
     <ion-item *ngIf="errorMap.name_error != ''">
       <ion-label color="danger" stacked>{{errorMap.name_error}}</ion-label>
     </ion-item>
-    //category
+
     <ion-item>
-      <ion-input [(ngModel)]="" name="shopCategory" type="text"></ion-input>
-    </ion-item>-->
-    <!-- <ion-item>
-      <ion-label>Shop Category</ion-label>
-      <ion-select [(ngModel)]="shop.shopCategory" name="shopCategory">
-        <ion-option *ngFor="let category of categoryList" [value]="category"></ion-option>
+      <ion-select [(ngModel)]="shop.shopCategory" name="shopCategory" placeholder="Shop Category">
+        <ion-option *ngFor="let category of categoryList" [value]="category.catName">{{category.catName}}</ion-option>
       </ion-select>
-    </ion-item> -->
+    </ion-item>
 
     <h4>Shop Address</h4>
     <ion-item>
-      <p>{{imageURI}}</p>
-      <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+      <ion-input [(ngModel)]="shop.address.line1" name="line1" type="text" placeholder="Line1 *"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.line1_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.line1_error}}</ion-label>
     </ion-item>
     <ion-item>
+      <ion-input [(ngModel)]="shop.address.area" name="area" type="text" placeholder="area *"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.area_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.area_error}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="shop.address.city" name="city" type="text" placeholder="city *"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.city_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.city_error}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="shop.address.state" name="state" type="text" placeholder="state *"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.state_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.state_error}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="shop.address.country" name="country" type="text" placeholder="country *"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.country_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.country_error}}</ion-label>
+    </ion-item>
+    <p>{{imageURI}}</p>
+    <ion-item>Shop Image :
+      <button ion-button color="secondary" type="button" (click)="getImage()">Get Image</button>
+    </ion-item>
+
+    <!-- <ion-item>
       <h4>Image Preview</h4>
       <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
-    </ion-item>
-    <button ion-button block type="submit">
+    </ion-item> -->
+    <button ion-button block type="submit" (click)="saveShop()">
       Add Shop
     </button>
   </form>

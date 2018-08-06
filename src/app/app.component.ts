@@ -2,8 +2,6 @@ import { Component, ViewChild } from "@angular/core";
 import { Nav, Platform, ToastController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
-import { MyTeamsPage } from "../pages/my-teams/my-teams";
-import { TournamentsPage } from "../pages/tournaments/tournaments";
 import { ManageShopPage } from "../pages/manage-shop/manage-shop";
 import { AddProductPage } from "../pages/add-product/add-product";
 import { MyShopPage } from "../pages/my-shop/my-shop";
@@ -31,7 +29,7 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [{ title: "Home", component: MyTeamsPage }];
+    //this.pages = [{ title: "Home", component: MyTeamsPage }];
   }
 
   initializeApp() {
@@ -47,12 +45,6 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
-  }
-  goToHome() {
-    this.nav.push(MyTeamsPage);
-  }
-  goToTournaments() {
-    this.nav.push(TournamentsPage);
   }
   goToManageShop() {
     this.nav.push(ManageShopPage);

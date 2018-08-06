@@ -7,14 +7,6 @@ import { MyApp } from "./app.component";
 import { StatusBar } from "@ionic-native/status-bar";
 
 import { SplashScreen } from "@ionic-native/splash-screen";
-import { MyTeamsPage } from "../pages/my-teams/my-teams";
-import { TournamentsPage } from "../pages/tournaments/tournaments";
-import { GamePage } from "../pages/game/game";
-import { TeamDetailPage } from "../pages/team-detail/team-detail";
-import { TeamsPage } from "../pages/teams/teams";
-import { TeamHomePage } from "../pages/team-home/team-home";
-import { StandingsPage } from "../pages/standings/standings";
-import { GameEventApiProvider } from "../providers/game-event-api/game-event-api";
 import { HttpModule } from "@angular/http";
 import { AddProductPage } from "../pages/add-product/add-product";
 import { ManageShopPage } from "../pages/manage-shop/manage-shop";
@@ -26,22 +18,16 @@ import { RegisterOwnerPage } from "../pages/register-owner/register-owner";
 import { ShopServiceProvider } from "../providers/shop-service/shop-service";
 import { AddShopPage } from "../pages/add-shop/add-shop";
 import { Camera } from "@ionic-native/camera";
-import {
-  FileTransfer,
+/*import {
   FileUploadOptions,
   FileTransferObject
-} from "@ionic-native/file-transfer";
+} from "@ionic-native/file-transfer";*/
+import { Geolocation } from "@ionic-native/geolocation";
+import { ProductServiceProvider } from "../providers/product-service/product-service";
 
 @NgModule({
   declarations: [
     MyApp,
-    MyTeamsPage,
-    TournamentsPage,
-    GamePage,
-    TeamDetailPage,
-    TeamsPage,
-    TeamHomePage,
-    StandingsPage,
     AddProductPage,
     ManageShopPage,
     MyShopPage,
@@ -59,13 +45,6 @@ import {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    MyTeamsPage,
-    TournamentsPage,
-    GamePage,
-    TeamDetailPage,
-    TeamsPage,
-    TeamHomePage,
-    StandingsPage,
     AddProductPage,
     ManageShopPage,
     MyShopPage,
@@ -77,11 +56,11 @@ import {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    GameEventApiProvider,
     AuthServiceProvider,
     ShopServiceProvider,
     Camera,
-    FileTransfer
+    Geolocation,
+    ProductServiceProvider
   ]
 })
 export class AppModule {}

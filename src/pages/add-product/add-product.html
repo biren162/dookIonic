@@ -1,5 +1,5 @@
 <!--
-  Generated template for the AddProductPage page.
+  Generated template for the AddShopPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,12 +7,48 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>AddProduct</ion-title>
+    <ion-title>addProduct</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <h4>Enter Product Detail:</h4>
+  <form>
+    <ion-item>
+      <ion-input [(ngModel)]="product.itemName" name="itemName" type="text" placeholder="Product Name *"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="errorMap.itemName_error != ''">
+      <ion-label color="danger" stacked>{{errorMap.name_error}}</ion-label>
+    </ion-item>
 
+    <ion-item>
+      <ion-input [(ngModel)]="product.itemPrice" name="itemPrice" type="text" placeholder="Price *"></ion-input>
+    </ion-item>
+    <ion-label>Product Category</ion-label>
+    <ion-item>
+      <ion-select [(ngModel)]="product.itemCat" name="itemCat" placeholder="Product Category" (ionChange)="changeCat()">
+        <ion-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-option>
+      </ion-select>
+      <ion-item *ngIf="errorMap.itemCat_error != ''">
+        <ion-label color="danger" stacked>{{errorMap.itemCat_error}}</ion-label>
+      </ion-item>
+    </ion-item>
+
+    <ion-item *ngIf='product.itemCat == "" '>
+      <ion-input [(ngModel)]="product.itemCat" name="itemCat" value="" type="text" placeholder="New category name"></ion-input>
+    </ion-item>
+
+    <ion-item>Product Image :
+      <button ion-button color="secondary" type="button" (click)="getImage()">Get Image</button>
+    </ion-item>
+
+    <!-- <ion-item>
+      <h4>Image Preview</h4>
+      <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+    </ion-item> -->
+    <button ion-button block type="submit" (click)="saveProduct()">
+      Add Product
+    </button>
+  </form>
 </ion-content>

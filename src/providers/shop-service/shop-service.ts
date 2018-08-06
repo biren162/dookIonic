@@ -7,7 +7,7 @@ import {
   LoadingController,
   ToastController
 } from "ionic-angular";
-import { FileTransfer, FileUploadOptions } from "@ionic-native/file-transfer";
+//import { FileTransfer, FileUploadOptions } from "@ionic-native/file-transfer";
 /*
   Generated class for the ShopServiceProvider provider.
 
@@ -25,7 +25,7 @@ export class ShopServiceProvider {
     public toastCtrl: ToastController
   ) {
     console.log("Hello ShopServiceProvider Provider");
-    this.apiUrl = "http://10.13.92.255:8080/";
+    this.apiUrl = "http://10.13.10.51:8080/";
   }
   /* saveImg(imgUri) {
     const fileTransfer: FileTransferObject = this.transfer.create();
@@ -63,15 +63,14 @@ export class ShopServiceProvider {
     });
     //console.log("calling api with param:" + imgUri64);
     return this.http
-      .post(`${this.apiUrl}uploadImgApi`, shop, options)
+      .post(`${this.apiUrl}addShopApi`, shop, options)
       .map(response => {
-        console.log("returning object:" + response);
         return response.json();
       });
   }
   getCategories(): Observable<any> {
     return this.http.get(`${this.apiUrl}ShopCategoriesApi`).map(response => {
-      console.log("category returned:" + response);
+      console.log("category returned:" + response.json());
       return response.json();
     });
   }
